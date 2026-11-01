@@ -39,14 +39,19 @@ export function TopBar() {
 
   return (
     <>
-      {/* Standalone fixed SketchPad wordmark */}
-      <div className="pointer-events-none fixed left-8 top-5 z-50">
+      {/* Standalone wordmark on large screens */}
+      <div className="pointer-events-none fixed left-8 top-5 z-50 hidden xl:block">
         <BrandMark showWordmark />
       </div>
 
-      {/* Main navbar */}
-      <header className="pointer-events-none absolute inset-x-0 top-0 z-30 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4">
-        <div className="pointer-events-auto flex w-full max-w-4xl items-center gap-1 rounded-xl border border-border bg-card px-2.5 py-1.5 shadow-sm">
+      <header className="pointer-events-none absolute inset-x-0 top-0 z-30 flex justify-center px-2 pt-2 sm:px-4 sm:pt-4">
+        <div className="pointer-events-auto flex w-full max-w-4xl min-w-0 items-center gap-1 rounded-xl border border-border bg-card px-1.5 py-1.5 shadow-sm sm:gap-1.5 sm:px-2.5">
+
+          {/* Compact wordmark on tablet and mobile */}
+          <div className="shrink-0 xl:hidden">
+            <BrandMark showWordmark />
+          </div>
+
           <input
             aria-label="Notebook name"
             value={notebookName}
@@ -59,12 +64,12 @@ export function TopBar() {
                 useSketchStore.getState().setNotebookName('Untitled notebook');
               }
             }}
-            className="min-w-0 flex-1 rounded-md bg-transparent px-1.5 py-1 text-sm font-medium outline-none transition-colors hover:bg-accent/60 focus-visible:ring-2 focus-visible:ring-ring"
+            className="hidden min-w-0 flex-1 rounded-md bg-transparent px-1.5 py-1 text-sm font-medium outline-none transition-colors hover:bg-accent/60 focus-visible:ring-2 focus-visible:ring-ring xl:block"
           />
 
           <SaveStatusIndicator />
 
-          <div className="mx-1.5 hidden h-6 w-px bg-border sm:block" />
+          <div className="mx-0.5 hidden h-6 w-px bg-border sm:block" />
 
           <IconButton
             label="Undo (Ctrl+Z)"
